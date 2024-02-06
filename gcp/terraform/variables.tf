@@ -20,6 +20,6 @@ variable "ssh_pub_key_file_path" {
 }
 
 variable "network_cidr" {
-  type = string
+  type    = string
   default = "10.10.0.0/24"
 }

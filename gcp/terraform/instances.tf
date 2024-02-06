@@ -78,7 +78,7 @@ resource "google_compute_instance" "worker" {
   metadata_startup_script = "echo hi > /test.txt"
 
   service_account {
-    email  = google_service_account.worker.email
+    email  = google_service_account.k8s_sa.email
     scopes = ["cloud-platform"]
   }
 }

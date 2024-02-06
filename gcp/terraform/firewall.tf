@@ -28,5 +28,5 @@ resource "google_compute_firewall" "k8s_self" {
   }
 
   target_service_accounts = [google_service_account.k8s_sa.email]
-  source_service_accounts = [google_service_account.defauk8s_salt.email]
+  source_service_accounts = [google_service_account.k8s_sa.email]
 }
