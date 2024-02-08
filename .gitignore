@@ -1,4 +1,4 @@
 .terraform/
 .terraform.lock.hcl
-var.auto.tfvars
+*.auto.tfvars
 backend.config

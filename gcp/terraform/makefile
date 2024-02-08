@@ -1,3 +1,6 @@
+login:
+	gcloud auth application-default login
+
 init:
 	terraform init -reconfigure -backend-config=backend.config
 
