@@ -17,5 +17,8 @@ apply:
 
 destroy:
 	terraform destroy
+	
+output:
+	terraform output
 
 all: validate plan apply
