@@ -3,6 +3,10 @@ data "google_compute_image" "ubuntu" {
   project = "ubuntu-os-cloud"
 }
 
+data "template_file" "startup" {
+  template = file("${path.cwd}/startup_script.sh")
+}
+
 resource "google_compute_instance" "master" {
   name         = "${var.prefix}-k8s-master"
   machine_type = "n2-standard-2"
@@ -35,7 +39,7 @@ resource "google_compute_instance" "master" {
     ssh-keys = "${var.instance_user}:${file(var.ssh_pub_key_file_path)}"
   }
 
-  metadata_startup_script = "echo hi > /test.txt"
+  metadata_startup_script = data.template_file.startup.rendered
 
   service_account {
     email  = google_service_account.k8s_sa.email
@@ -75,7 +79,7 @@ resource "google_compute_instance" "worker" {
     ssh-keys = "${var.instance_user}:${file(var.ssh_pub_key_file_path)}"
   }
 
-  metadata_startup_script = "echo hi > /test.txt"
+  metadata_startup_script = data.template_file.startup.rendered
 
   service_account {
     email  = google_service_account.k8s_sa.email
